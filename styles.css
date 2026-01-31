@@ -1,180 +1,412 @@
-/* ===== CSS Variables & Root Styles ===== */
+/**
+ * ========================================
+ * PROFESSIONAL PORTFOLIO WEBSITE - CSS
+ * ========================================
+ * This CSS file demonstrates:
+ * - CSS Variables for maintainable design system
+ * - Responsive layouts with Flexbox
+ * - Pseudo-classes for interactivity
+ * - Form styling and accessibility
+ * - Media queries for mobile responsiveness
+ * - Box model properties (margin, padding, border)
+ * - Typography hierarchy and readability
+ * - CSS selectors (universal, type, class, ID, attribute, pseudo-elements)
+ * ========================================
+ */
+
+/* ===== 1. CSS VARIABLES & ROOT STYLES ===== */
+/* Root selector: Defines global CSS custom properties (variables) */
+/* These variables make it easy to maintain a consistent design system */
+/* Usage: var(--variable-name) throughout the stylesheet */
 :root {
-    --primary-color: #35424a;
-    --secondary-color: #6c5ce7;
-    --accent-color: #00b894;
-    --text-dark: #333333;
-    --text-light: #666666;
-    --bg-light: #f8f9fa;
-    --bg-white: #ffffff;
+    /* COLOR PALETTE */
+    --primary-color: #35424a;        /* Dark blue-gray for headers and primary elements */
+    --secondary-color: #6c5ce7;      /* Purple for navigation and accents */
+    --accent-color: #00b894;         /* Green for interactive elements and highlights */
+    --text-dark: #333333;            /* Dark text for readability */
+    --text-light: #666666;           /* Light gray text for secondary content */
+    --bg-light: #f8f9fa;             /* Very light gray background */
+    --bg-white: #ffffff;             /* Pure white for cards and containers */
+    --error-color: #e74c3c;          /* Red for error states */
+    --warning-color: #f39c12;        /* Orange for warnings */
+    --success-color: #27ae60;        /* Green for success messages */
+    
+    /* TYPOGRAPHY */
+    --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    --font-weight-extra-bold: 700;
+    
+    /* BOX MODEL & SPACING */
     --border-radius: 8px;
+    --border-radius-small: 4px;
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    --spacing-2xl: 50px;
+    
+    /* SHADOWS & EFFECTS */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    
+    /* TRANSITIONS & ANIMATIONS */
     --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+    --transition-slow: all 0.5s ease;
 }
 
-/* ===== Reset & Base Styles ===== */
+
+/* ===== 2. RESET & BASE STYLES ===== */
+/* 
+ * UNIVERSAL SELECTOR (*)
+ * Applies to ALL elements on the page
+ * Used to reset default margins and padding
+ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;                          /* Remove default margin from all elements */
+    padding: 0;                         /* Remove default padding from all elements */
+    box-sizing: border-box;             /* Include padding and border in width/height calculations */
 }
 
+/*
+ * HTML ELEMENT (Type Selector)
+ * Affects the root HTML element
+ */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;            /* Smooth scrolling when clicking anchor links */
+    font-size: var(--font-size-base);   /* Base font size for rem calculations */
 }
 
+/*
+ * BODY ELEMENT (Type Selector)
+ * Styling for the main body container
+ * FLEXBOX: Uses flex layout to ensure footer stays at bottom
+ */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-family-primary);
     background-color: var(--bg-light);
     color: var(--text-dark);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    line-height: var(--line-height-base);  /* BOX MODEL: Line height for readability */
+    display: flex;                          /* FLEXBOX: Enable flex layout */
+    flex-direction: column;                 /* FLEXBOX: Stack items vertically */
+    min-height: 100vh;                      /* BOX MODEL: Minimum height = viewport height */
 }
 
+/*
+ * MAIN ELEMENT (Type Selector)
+ * Main content area styling
+ */
 main {
-    flex: 1;
-    padding-bottom: 120px;
+    flex: 1;                                /* FLEXBOX: Takes available space, pushes footer down */
+    padding-bottom: var(--spacing-2xl);     /* BOX MODEL: Prevent footer overlap with content */
 }
 
-/* ===== Header & Navigation ===== */
-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3840 100%);
-    color: var(--bg-white);
-    padding: 30px 20px 0;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
 
-header h1 {
-    margin-bottom: 20px;
-    font-size: 2.5rem;
-    font-weight: 700;
-}
+/* ===== 3. TYPOGRAPHY ===== */
+/*
+ * TYPOGRAPHY: Defines heading hierarchy
+ * SELECTORS: Type selectors (h1, h2, h3, etc.)
+ * SIZE SCALE: Creates visual hierarchy
+ * COLORS: Consistent primary color for all headings
+ */
 
-nav ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    background-color: var(--secondary-color);
-    padding: 15px 20px;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-    justify-content: center;
-}
-
-nav li {
-    display: inline;
-}
-
-nav a {
-    color: var(--bg-white);
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-nav a:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-/* ===== Main Content ===== */
-section {
-    padding: 30px 20px;
-    margin: 20px 0;
-}
-
-article {
-    background-color: var(--bg-white);
-    padding: 25px;
-    margin-bottom: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--secondary-color);
-}
-
+/* 
+ * GROUPING SELECTOR (h2, h3, h4, h5, h6)
+ * Applies common styles to multiple heading elements
+ * Improves consistency and reduces code duplication
+ */
 h2, h3, h4, h5, h6 {
-    color: var(--primary-color);
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-weight: 600;
+    color: var(--primary-color);            /* TYPOGRAPHY: Consistent heading color */
+    margin-top: var(--spacing-lg);          /* BOX MODEL: Top margin for separation */
+    margin-bottom: var(--spacing-md);       /* BOX MODEL: Bottom margin for spacing */
+    font-weight: var(--font-weight-bold);   /* TYPOGRAPHY: Bold weight for prominence */
+    line-height: 1.3;                       /* TYPOGRAPHY: Tighter line height for headings */
 }
 
-h2 {
-    font-size: 1.8rem;
-}
-
-h3 {
-    font-size: 1.4rem;
-}
-
-p {
-    margin-bottom: 15px;
-    color: var(--text-light);
-}
-
-blockquote {
-    border-left: 4px solid var(--secondary-color);
-    padding-left: 20px;
-    margin: 20px 0;
-    font-style: italic;
-    color: var(--text-light);
-}
-
-mark {
-    background-color: #fff3cd;
-    padding: 2px 6px;
-    border-radius: 3px;
-}
-
-/* ===== Aside ===== */
-aside {
-    background: linear-gradient(135deg, var(--bg-light) 0%, #e9ecef 100%);
-    padding: 25px;
-    margin: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border-top: 3px solid var(--accent-color);
-}
-
-/* ===== Forms ===== */
-form {
-    background-color: var(--bg-white);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin: 20px auto;
-    max-width: 600px;
-    border-top: 4px solid var(--secondary-color);
-}
-
-fieldset {
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-legend {
-    color: var(--primary-color);
-    font-weight: 600;
-    padding: 0 10px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
+/* H1 STYLES - Main page titles */
+h1 {
+    font-size: 2.5rem;                      /* TYPOGRAPHY: Large size for main title */
+    font-weight: var(--font-weight-extra-bold);
+    margin-bottom: var(--spacing-lg);
     color: var(--text-dark);
 }
 
+/* H2 STYLES - Section titles */
+h2 {
+    font-size: 1.8rem;                      /* TYPOGRAPHY: Large section heading */
+}
+
+/* H3 STYLES - Subsection titles */
+h3 {
+    font-size: 1.4rem;                      /* TYPOGRAPHY: Medium subsection heading */
+}
+
+/* H4 STYLES - Minor headings */
+h4 {
+    font-size: 1.2rem;
+}
+
+/* H5 & H6 STYLES - Small headings */
+h5, h6 {
+    font-size: 1rem;
+}
+
+/*
+ * PARAGRAPH ELEMENT (Type Selector)
+ * TYPOGRAPHY: Readable body text
+ */
+p {
+    margin-bottom: var(--spacing-md);       /* BOX MODEL: Space between paragraphs */
+    color: var(--text-light);               /* TYPOGRAPHY: Use lighter text color */
+    font-weight: var(--font-weight-normal);
+}
+
+/*
+ * EMPHASIS ELEMENTS
+ * SELECTORS: Type selectors for semantic emphasis
+ */
+strong, b {
+    font-weight: var(--font-weight-bold);   /* TYPOGRAPHY: Make text bold */
+}
+
+em, i {
+    font-style: italic;                     /* TYPOGRAPHY: Make text italic */
+}
+
+small {
+    font-size: 0.875rem;                    /* TYPOGRAPHY: Smaller text size */
+    color: var(--text-light);
+}
+
+/*
+ * HIGHLIGHT ELEMENT
+ * PSEUDO-CLASS: Not a pseudo-class, but demonstrates mark styling
+ */
+mark {
+    background-color: #fff3cd;              /* COLORS: Yellow highlight background */
+    padding: var(--spacing-xs) 6px;         /* BOX MODEL: Padding around highlight */
+    border-radius: var(--border-radius-small);
+}
+
+/* ===== 4. HEADER & NAVIGATION STYLING ===== */
+/*
+ * HEADER ELEMENT STYLING
+ * - Sticky positioning for persistent navigation
+ * - Gradient background for visual appeal
+ * - Shadow for depth
+ */
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3840 100%);  /* COLORS: Gradient */
+    color: var(--bg-white);
+    padding: var(--spacing-xl) var(--spacing-lg) 0;                              /* BOX MODEL: Padding */
+    box-shadow: var(--shadow);                                                   /* BOX MODEL: Shadow */
+    position: sticky;                                                            /* BOX MODEL: Sticky positioning */
+    top: 0;
+    z-index: 100;                                                                /* BOX MODEL: Stack order */
+}
+
+/* H1 in header - Page title */
+header h1 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--bg-white);
+    font-size: 2.5rem;
+}
+
+/*
+ * NAVIGATION LIST (NAV > UL)
+ * SELECTOR: Descendant selector (nav ul)
+ * FLEXBOX: Uses flex for horizontal layout
+ * BOX MODEL: Padding and gap for spacing
+ */
+nav ul {
+    list-style: none;                                           /* Remove bullet points */
+    display: flex;                                              /* FLEXBOX: Enable flex layout */
+    flex-wrap: wrap;                                            /* FLEXBOX: Wrap on small screens */
+    gap: var(--spacing-sm);                                     /* BOX MODEL: Space between items */
+    background-color: var(--secondary-color);                  /* COLORS: Navigation background */
+    padding: var(--spacing-md) var(--spacing-lg);              /* BOX MODEL: Internal padding */
+    border-radius: 0 0 var(--border-radius) var(--border-radius); /* BOX MODEL: Rounded bottom corners */
+    justify-content: center;                                    /* FLEXBOX: Center items horizontally */
+}
+
+/*
+ * NAVIGATION LIST ITEMS
+ * SELECTOR: Child selector (nav li)
+ */
+nav li {
+    display: inline;                                            /* Display items inline */
+}
+
+/*
+ * NAVIGATION LINKS
+ * SELECTOR: Descendant selector (nav a)
+ * PSEUDO-CLASSES: :hover, :focus for interactivity
+ */
+nav a {
+    color: var(--bg-white);                                     /* COLORS: Link text color */
+    text-decoration: none;                                      /* Remove underline */
+    padding: var(--spacing-sm) var(--spacing-md);              /* BOX MODEL: Button-like padding */
+    border-radius: var(--border-radius-small);                 /* BOX MODEL: Rounded corners */
+    transition: var(--transition);                              /* Smooth animation */
+    font-weight: var(--font-weight-medium);                    /* TYPOGRAPHY: Medium weight */
+    display: block;                                             /* Better click target */
+}
+
+/*
+ * HOVER PSEUDO-CLASS for Navigation Links
+ * Triggered when user hovers over link
+ * Provides visual feedback for interactivity
+ */
+nav a:hover {
+    background-color: var(--accent-color);                     /* COLORS: Change background on hover */
+    color: var(--primary-color);                               /* COLORS: Change text color */
+    text-decoration: none;
+    transform: translateY(-2px);                               /* Subtle lift effect */
+    box-shadow: 0 2px 8px rgba(0, 184, 148, 0.3);              /* Enhanced shadow on hover */
+}
+
+/*
+ * FOCUS PSEUDO-CLASS for Navigation Links
+ * Triggered when link receives keyboard focus
+ * Important for accessibility
+ */
+nav a:focus {
+    outline: 2px solid var(--accent-color);                    /* Keyboard navigation indicator */
+    outline-offset: 2px;
+}
+
+/* ===== 5. MAIN CONTENT SECTIONS ===== */
+/*
+ * SECTION ELEMENT STYLING
+ * SELECTOR: Type selector
+ * BOX MODEL: Padding and margin for spacing
+ */
+section {
+    padding: var(--spacing-xl) var(--spacing-lg);              /* BOX MODEL: Internal padding */
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: External margin */
+}
+
+/*
+ * ARTICLE ELEMENT STYLING
+ * - Card-like appearance with shadow
+ * - Left border accent for visual interest
+ * SELECTORS: Type selector + pseudo-classes
+ */
+article {
+    background-color: var(--bg-white);                         /* COLORS: White background */
+    padding: 25px;                                             /* BOX MODEL: Internal padding */
+    margin-bottom: var(--spacing-lg);                          /* BOX MODEL: Bottom margin */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    box-shadow: var(--shadow);                                 /* BOX MODEL: Depth shadow */
+    border-left: 4px solid var(--secondary-color);             /* BOX MODEL: Accent border */
+    transition: var(--transition);                             /* Smooth animation */
+}
+
+/*
+ * HOVER PSEUDO-CLASS for Articles
+ * Subtle effect when user hovers over card
+ */
+article:hover {
+    box-shadow: var(--shadow-md);                              /* Enhanced shadow on hover */
+    transform: translateY(-2px);                               /* Lift effect */
+}
+
+/*
+ * BLOCKQUOTE ELEMENT STYLING
+ * SELECTOR: Type selector
+ * TYPOGRAPHY: Styled quotation formatting
+ */
+blockquote {
+    border-left: 4px solid var(--secondary-color);             /* BOX MODEL: Left accent border */
+    padding-left: var(--spacing-lg);                           /* BOX MODEL: Padding on left side */
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: Vertical margin */
+    font-style: italic;                                        /* TYPOGRAPHY: Italic for emphasis */
+    color: var(--text-light);                                  /* COLORS: Lighter text */
+}
+
+/*
+ * ASIDE ELEMENT STYLING
+ * - Sidebar or callout box styling
+ * SELECTORS: Type selector
+ */
+aside {
+    background: linear-gradient(135deg, var(--bg-light) 0%, #e9ecef 100%);  /* COLORS: Subtle gradient */
+    padding: 25px;                                             /* BOX MODEL: Internal padding */
+    margin: var(--spacing-lg);                                 /* BOX MODEL: External margin */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    box-shadow: var(--shadow);                                 /* BOX MODEL: Shadow effect */
+    border-top: 3px solid var(--accent-color);                 /* BOX MODEL: Top accent border */
+}
+
+/* ===== 6. FORM STYLING ===== */
+/*
+ * FORM ELEMENT STYLING
+ * - Container for all form elements
+ * - Card-like appearance for visual separation
+ * SELECTORS: Type selector
+ * LAYOUT: Uses max-width to limit form width
+ */
+form {
+    background-color: var(--bg-white);                         /* COLORS: White background */
+    padding: var(--spacing-xl);                                /* BOX MODEL: Internal padding */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    box-shadow: var(--shadow);                                 /* BOX MODEL: Shadow for depth */
+    margin: var(--spacing-lg) auto;                            /* BOX MODEL: Centered with margins */
+    max-width: 600px;                                          /* BOX MODEL: Limit form width */
+    border-top: 4px solid var(--secondary-color);              /* BOX MODEL: Accent top border */
+}
+
+/*
+ * FIELDSET ELEMENT STYLING
+ * - Groups related form elements
+ * SELECTORS: Type selector
+ */
+fieldset {
+    border: 1px solid #e0e0e0;                                 /* BOX MODEL: Subtle border */
+    border-radius: var(--border-radius-small);                /* BOX MODEL: Rounded corners */
+    padding: var(--spacing-lg);                                /* BOX MODEL: Internal padding */
+    margin-bottom: var(--spacing-lg);                          /* BOX MODEL: Bottom margin */
+}
+
+/*
+ * LEGEND ELEMENT STYLING
+ * - Label for fieldset
+ * SELECTORS: Type selector
+ * TYPOGRAPHY: Bold and colored
+ */
+legend {
+    color: var(--primary-color);                               /* COLORS: Primary color */
+    font-weight: var(--font-weight-bold);                     /* TYPOGRAPHY: Bold weight */
+    padding: 0 var(--spacing-sm);                              /* BOX MODEL: Padding around legend */
+}
+
+/*
+ * LABEL ELEMENT STYLING
+ * - Form field labels
+ * SELECTORS: Type selector
+ * TYPOGRAPHY: Medium weight for prominence
+ */
+label {
+    display: block;                                            /* Change display to block */
+    margin-bottom: var(--spacing-sm);                          /* BOX MODEL: Bottom margin */
+    font-weight: var(--font-weight-medium);                   /* TYPOGRAPHY: Medium weight */
+    color: var(--text-dark);                                   /* COLORS: Dark text */
+}
+
+/*
+ * INPUT ELEMENTS STYLING
+ * SELECTOR: Attribute selector for specific input types
+ * SELECTORS: [type="text"], [type="email"], [type="password"], etc.
+ * BOX MODEL: Consistent padding and border styling
+ * Multiple input types grouped with comma selector
+ */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -184,275 +416,593 @@ input[type="color"],
 input[type="range"],
 select,
 textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: var(--transition);
-    font-family: inherit;
+    width: 100%;                                               /* BOX MODEL: Full width */
+    padding: var(--spacing-sm);                                /* BOX MODEL: Internal padding */
+    margin-bottom: var(--spacing-md);                          /* BOX MODEL: Bottom margin */
+    border: 1px solid #ddd;                                    /* BOX MODEL: Light border */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    font-size: 1rem;                                           /* TYPOGRAPHY: Readable size */
+    transition: var(--transition);                             /* TRANSITIONS: Smooth animation */
+    font-family: inherit;                                      /* TYPOGRAPHY: Inherit font */
 }
 
+/*
+ * INPUT FOCUS PSEUDO-CLASS
+ * Triggered when user focuses on input (clicking or tabbing)
+ * Important for form accessibility and usability
+ * PSEUDO-CLASSES: :focus
+ */
 input:focus,
 select:focus,
 textarea:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    outline: none;                                             /* Remove default browser outline */
+    border-color: var(--secondary-color);                      /* COLORS: Change border color */
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);            /* BOX MODEL: Focus ring shadow */
 }
 
+/*
+ * TEXTAREA ELEMENT STYLING
+ * - Multi-line text input
+ * SELECTORS: Type selector
+ */
 textarea {
-    resize: vertical;
-    min-height: 120px;
+    resize: vertical;                                          /* Allow vertical resizing only */
+    min-height: 120px;                                         /* BOX MODEL: Minimum height */
+    font-family: inherit;
 }
 
+/*
+ * BUTTON ELEMENT STYLING
+ * SELECTOR: Type selector
+ * PSEUDO-CLASSES: :hover, :focus, :active for interactivity
+ */
 button {
-    background-color: var(--secondary-color);
-    color: var(--bg-white);
-    padding: 12px 25px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    margin: 10px 5px;
+    background-color: var(--secondary-color);                  /* COLORS: Primary button color */
+    color: var(--bg-white);                                    /* COLORS: Text color */
+    padding: var(--spacing-md) 25px;                           /* BOX MODEL: Button padding */
+    border: none;                                              /* Remove default border */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    font-size: 1rem;                                           /* TYPOGRAPHY: Font size */
+    font-weight: var(--font-weight-bold);                     /* TYPOGRAPHY: Bold weight */
+    cursor: pointer;                                           /* Change cursor to pointer */
+    transition: var(--transition);                             /* TRANSITIONS: Smooth animation */
+    margin: var(--spacing-sm) 5px;                             /* BOX MODEL: Margin around button */
 }
 
+/*
+ * BUTTON HOVER PSEUDO-CLASS
+ * Visual feedback when user hovers over button
+ * PSEUDO-CLASSES: :hover
+ */
 button:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+    background-color: var(--accent-color);                     /* COLORS: Change background */
+    transform: translateY(-2px);                               /* Subtle lift effect */
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);            /* Enhanced shadow */
 }
 
+/*
+ * BUTTON FOCUS PSEUDO-CLASS
+ * Visual feedback for keyboard navigation
+ * PSEUDO-CLASSES: :focus - important for accessibility
+ */
+button:focus {
+    outline: 2px solid var(--secondary-color);                /* Keyboard focus indicator */
+    outline-offset: 2px;
+}
+
+/*
+ * BUTTON ACTIVE PSEUDO-CLASS
+ * Visual feedback when button is clicked
+ * PSEUDO-CLASSES: :active
+ */
+button:active {
+    transform: translateY(0);                                  /* Reset lift effect */
+    box-shadow: 0 2px 8px rgba(0, 184, 148, 0.2);
+}
+
+/*
+ * RESET BUTTON STYLING
+ * Attribute selector for reset button type
+ * Different color to distinguish from submit
+ * SELECTOR: Attribute selector [type="reset"]
+ */
 button[type="reset"] {
-    background-color: #e74c3c;
+    background-color: var(--error-color);                      /* COLORS: Error/red color */
 }
 
+/*
+ * RESET BUTTON HOVER PSEUDO-CLASS
+ * PSEUDO-CLASSES: :hover
+ */
 button[type="reset"]:hover {
-    background-color: #c0392b;
+    background-color: #c0392b;                                 /* Darker red on hover */
 }
 
-/* ===== Tables ===== */
+
+/* ===== 7. TABLE STYLING ===== */
+/*
+ * TABLE ELEMENT STYLING
+ * - Data table presentation
+ * SELECTORS: Type selector
+ * BOX MODEL: Full width with shadow
+ */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: var(--bg-white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
+    width: 100%;                                               /* BOX MODEL: Full width */
+    border-collapse: collapse;                                 /* BOX MODEL: Remove cell spacing */
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: Vertical margin */
+    background-color: var(--bg-white);                         /* COLORS: White background */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    overflow: hidden;                                          /* BOX MODEL: Hide overflow */
+    box-shadow: var(--shadow);                                 /* BOX MODEL: Shadow effect */
 }
 
+/*
+ * TABLE HEAD STYLING
+ * SELECTOR: Type selector (thead)
+ * COLORS: Primary color background with white text
+ */
 thead {
-    background-color: var(--primary-color);
-    color: var(--bg-white);
+    background-color: var(--primary-color);                    /* COLORS: Dark header background */
+    color: var(--bg-white);                                    /* COLORS: White text */
 }
 
+/*
+ * TABLE HEADER & DATA CELLS
+ * SELECTOR: Type selectors (th, td)
+ * BOX MODEL: Padding and borders for structure
+ */
 th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+    padding: var(--spacing-md);                                /* BOX MODEL: Cell padding */
+    text-align: left;                                          /* TYPOGRAPHY: Text alignment */
+    border-bottom: 1px solid #e0e0e0;                          /* BOX MODEL: Subtle cell borders */
 }
 
+/*
+ * TABLE BODY ROW HOVER PSEUDO-CLASS
+ * Visual feedback when hovering over table rows
+ * SELECTOR: Type selector with pseudo-class (tbody tr:hover)
+ * PSEUDO-CLASSES: :hover
+ */
 tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5;                                 /* COLORS: Light highlight on hover */
+    transition: var(--transition-fast);                        /* TRANSITIONS: Smooth color change */
 }
 
+/*
+ * TABLE FOOTER STYLING
+ * SELECTOR: Type selector (tfoot)
+ * COLORS: Light background for summary rows
+ */
 tfoot {
-    background-color: var(--bg-light);
-    font-weight: 600;
+    background-color: var(--bg-light);                         /* COLORS: Light background */
+    font-weight: var(--font-weight-bold);                     /* TYPOGRAPHY: Bold text */
 }
 
-/* ===== Lists ===== */
+/* ===== 8. LIST STYLING ===== */
+/*
+ * UNORDERED & ORDERED LISTS
+ * SELECTOR: Type selectors (ul, ol)
+ * BOX MODEL: Proper margin and padding
+ */
 ul, ol {
-    margin-left: 30px;
-    margin-bottom: 15px;
+    margin-left: 30px;                                         /* BOX MODEL: Left margin for indentation */
+    margin-bottom: var(--spacing-md);                          /* BOX MODEL: Bottom margin */
 }
 
+/*
+ * LIST ITEMS
+ * SELECTOR: Type selector (li)
+ * BOX MODEL: Margin between items
+ */
 li {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);                          /* BOX MODEL: Space between items */
+    color: var(--text-light);                                  /* COLORS: Text color */
 }
 
-/* ===== Media Elements ===== */
+/* ===== 9. MEDIA ELEMENTS ===== */
+/*
+ * IMAGE ELEMENT STYLING
+ * SELECTOR: Type selector (img)
+ * BOX MODEL: Responsive and rounded
+ * TYPOGRAPHY: Margin for spacing
+ */
 img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--border-radius);
-    margin: 15px 0;
+    max-width: 100%;                                           /* BOX MODEL: Responsive - never exceed container */
+    height: auto;                                              /* BOX MODEL: Maintain aspect ratio */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: Vertical margin */
+    box-shadow: var(--shadow-sm);                              /* BOX MODEL: Subtle shadow */
+    transition: var(--transition);                             /* TRANSITIONS: Smooth animation */
 }
 
+/*
+ * IMAGE HOVER PSEUDO-CLASS
+ * Visual feedback when hovering over images
+ * PSEUDO-CLASSES: :hover
+ */
+img:hover {
+    box-shadow: var(--shadow-md);                              /* Enhanced shadow on hover */
+    transform: scale(1.02);                                    /* Subtle zoom effect */
+}
+
+/*
+ * FIGURE ELEMENT STYLING
+ * - Container for images with captions
+ * SELECTOR: Type selector (figure)
+ */
 figure {
-    margin: 20px 0;
-    text-align: center;
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: Margin */
+    text-align: center;                                        /* TYPOGRAPHY: Center content */
 }
 
+/*
+ * FIGURE CAPTION STYLING
+ * - Caption below images
+ * SELECTOR: Type selector (figcaption)
+ * TYPOGRAPHY: Smaller, lighter text
+ */
 figcaption {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
+    margin-top: var(--spacing-sm);                             /* BOX MODEL: Top margin */
+    font-size: 0.9rem;                                         /* TYPOGRAPHY: Smaller font */
+    color: var(--text-light);                                  /* COLORS: Lighter text */
+    font-style: italic;                                        /* TYPOGRAPHY: Italic style */
 }
 
+/*
+ * AUDIO & VIDEO ELEMENT STYLING
+ * - Media player styling
+ * SELECTOR: Type selectors
+ * BOX MODEL: Responsive sizing
+ */
 audio, video, iframe {
-    width: 100%;
-    max-width: 100%;
-    margin: 20px 0;
-    border-radius: var(--border-radius);
+    width: 100%;                                               /* BOX MODEL: Full container width */
+    max-width: 100%;                                           /* BOX MODEL: Responsive max width */
+    margin: var(--spacing-lg) 0;                               /* BOX MODEL: Vertical margin */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    box-shadow: var(--shadow);                                 /* BOX MODEL: Shadow effect */
 }
 
-/* ===== Progress & Meter ===== */
+/* ===== 10. PROGRESS & METER ===== */
+/*
+ * PROGRESS BAR STYLING
+ * SELECTOR: Type selector (progress)
+ * BOX MODEL: Custom height
+ */
 progress, meter {
-    width: 100%;
-    height: 25px;
-    border-radius: 4px;
+    width: 100%;                                               /* BOX MODEL: Full width */
+    height: 25px;                                              /* BOX MODEL: Custom height */
+    border-radius: var(--border-radius-small);                /* BOX MODEL: Rounded appearance */
 }
 
-/* ===== Code Elements ===== */
+/* ===== 11. CODE & PREFORMATTED TEXT ===== */
+/*
+ * PREFORMATTED & CODE STYLING
+ * SELECTOR: Type selectors (pre, code)
+ * COLORS: Light background for distinction
+ */
 pre, code {
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
+    background-color: #f5f5f5;                                 /* COLORS: Light gray background */
+    border-radius: var(--border-radius-small);                /* BOX MODEL: Rounded corners */
+    font-family: 'Courier New', monospace;                     /* TYPOGRAPHY: Monospace font */
 }
 
+/*
+ * PREFORMATTED TEXT STYLING
+ * - Code blocks
+ * SELECTOR: Type selector (pre)
+ * BOX MODEL: Padding and scrolling
+ */
 pre {
-    padding: 15px;
-    overflow-x: auto;
-    margin: 15px 0;
-    border-left: 4px solid var(--secondary-color);
+    padding: var(--spacing-md);                                /* BOX MODEL: Internal padding */
+    overflow-x: auto;                                          /* BOX MODEL: Horizontal scroll for long code */
+    margin: var(--spacing-md) 0;                               /* BOX MODEL: Margin */
+    border-left: 4px solid var(--secondary-color);             /* BOX MODEL: Accent border */
 }
 
+/*
+ * INLINE CODE STYLING
+ * - Small code snippets in text
+ * SELECTOR: Type selector (code)
+ * BOX MODEL: Small padding
+ */
 code {
-    padding: 2px 6px;
+    padding: 2px 6px;                                          /* BOX MODEL: Small padding */
+    color: #d63384;                                            /* COLORS: Code color */
 }
 
+/*
+ * KEYBOARD INPUT STYLING
+ * - Shows keyboard keys
+ * SELECTOR: Type selector (kbd)
+ * COLORS: Dark background
+ */
 kbd {
-    background-color: var(--primary-color);
-    color: var(--bg-white);
-    padding: 3px 8px;
-    border-radius: 3px;
+    background-color: var(--primary-color);                    /* COLORS: Dark background */
+    color: var(--bg-white);                                    /* COLORS: White text */
+    padding: 3px 8px;                                          /* BOX MODEL: Small padding */
+    border-radius: var(--border-radius-small);                /* BOX MODEL: Rounded corners */
     font-family: monospace;
+    font-size: 0.85rem;                                        /* TYPOGRAPHY: Smaller size */
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);            /* BOX MODEL: 3D effect */
 }
 
+/*
+ * SAMPLE OUTPUT STYLING
+ * - Shows program output
+ * SELECTOR: Type selector (samp)
+ * COLORS: Green for success
+ */
 samp {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 2px 6px;
-    border-radius: 3px;
+    background-color: #d4edda;                                 /* COLORS: Light green background */
+    color: #155724;                                            /* COLORS: Dark green text */
+    padding: 2px 6px;                                          /* BOX MODEL: Small padding */
+    border-radius: var(--border-radius-small);                /* BOX MODEL: Rounded corners */
 }
 
-/* ===== Footer ===== */
+
+
+/* ===== 12. FOOTER & HORIZONTAL RULE ===== */
+/*
+ * FOOTER ELEMENT STYLING
+ * - Bottom page section
+ * SELECTOR: Type selector (footer)
+ * LAYOUT: Uses flex (from body) to position at bottom
+ * COLORS: Gradient background matching header
+ */
 footer {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3840 100%);
-    color: var(--bg-white);
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3840 100%);  /* COLORS: Gradient */
+    color: var(--bg-white);                                    /* COLORS: White text */
+    text-align: center;                                        /* TYPOGRAPHY: Center alignment */
+    padding: var(--spacing-lg);                                /* BOX MODEL: Internal padding */
+    margin-top: auto;                                          /* FLEXBOX: Push to bottom (with body flex) */
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);                /* BOX MODEL: Top shadow */
 }
 
+/*
+ * FOOTER PARAGRAPH STYLING
+ * SELECTOR: Type selector (footer p)
+ * COLORS: White text for contrast
+ */
 footer p {
-    color: var(--bg-white);
-    margin: 0;
+    color: var(--bg-white);                                    /* COLORS: White text */
+    margin: 0;                                                 /* BOX MODEL: Remove default margin */
 }
 
+/*
+ * HORIZONTAL RULE STYLING
+ * - Visual divider element
+ * SELECTOR: Type selector (hr)
+ * BOX MODEL: Clean border styling
+ */
 hr {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 30px 0;
+    border: none;                                              /* Remove default border */
+    border-top: 1px solid #e0e0e0;                             /* BOX MODEL: Subtle top border */
+    margin: var(--spacing-xl) 0;                               /* BOX MODEL: Vertical margin */
 }
 
+/*
+ * ADDRESS ELEMENT STYLING
+ * - Contact information styling
+ * SELECTOR: Type selector (address)
+ * BOX MODEL: Card-like appearance
+ */
 address {
-    font-style: normal;
-    background-color: var(--bg-light);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin: 15px 0;
+    font-style: normal;                                        /* TYPOGRAPHY: Override italic default */
+    background-color: var(--bg-light);                         /* COLORS: Light background */
+    padding: var(--spacing-md);                                /* BOX MODEL: Internal padding */
+    border-radius: var(--border-radius);                       /* BOX MODEL: Rounded corners */
+    margin: var(--spacing-md) 0;                               /* BOX MODEL: Vertical margin */
 }
 
-/* ===== Utility Classes ===== */
+/* ===== 13. UTILITY CLASSES ===== */
+/*
+ * UTILITY CLASSES for common styling patterns
+ * Class selectors (.) - can be reused across HTML
+ * These provide reusable styling for various elements
+ */
+
+/*
+ * TEXT CENTER CLASS
+ * - Centers text content
+ * SELECTOR: Class selector (.text-center)
+ * TYPOGRAPHY: Text alignment
+ */
 .text-center {
-    text-align: center;
+    text-align: center;                                        /* TYPOGRAPHY: Center text */
 }
 
+/*
+ * TEXT JUSTIFY CLASS
+ * - Justifies text for full width alignment
+ * SELECTOR: Class selector (.text-justify)
+ * TYPOGRAPHY: Text alignment
+ */
 .text-justify {
-    text-align: justify;
+    text-align: justify;                                       /* TYPOGRAPHY: Justified alignment */
 }
 
-/* ===== Responsive Design ===== */
+/* ===== 14. RESPONSIVE DESIGN - MEDIA QUERIES ===== */
+/*
+ * MEDIA QUERIES: Adjust styles based on screen size
+ * Mobile-first responsive design approach
+ * Breakpoints: 768px (tablet), 480px (mobile)
+ * 
+ * BOX MODEL: Responsive spacing
+ * TYPOGRAPHY: Responsive font sizes
+ * LAYOUT: Responsive flex directions and display
+ * 
+ * Media Query Syntax: @media (condition) { /* styles */ }
+ */
+
+/* ===== TABLET BREAKPOINT (≤768px) ===== */
+/*
+ * MEDIA QUERY: max-width: 768px
+ * Applies styles to devices with width 768px or less
+ * This includes tablets in portrait mode
+ * 
+ * Changes:
+ * - Reduce header font size
+ * - Stack navigation vertically
+ * - Adjust form styling
+ * - Optimize table readability
+ */
 @media (max-width: 768px) {
+    /* Smaller header on tablets */
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.8rem;                                     /* TYPOGRAPHY: Reduce heading size */
     }
 
+    /* Stack navigation vertically using flex */
     nav ul {
-        flex-direction: column;
-        gap: 5px;
+        flex-direction: column;                                /* FLEXBOX: Change direction to column */
+        gap: var(--spacing-xs);                                /* BOX MODEL: Reduce gap */
     }
 
+    /* Make navigation links full width */
     nav a {
-        display: block;
-        padding: 10px;
+        display: block;                                        /* Display as block for full width */
+        padding: var(--spacing-sm);                            /* BOX MODEL: Adjust padding */
     }
 
+    /* Adjust form for tablet screens */
     form {
-        margin: 20px 10px;
-        max-width: 100%;
+        margin: var(--spacing-lg) var(--spacing-sm);           /* BOX MODEL: Adjust margins */
+        max-width: 100%;                                       /* BOX MODEL: Full width on tablet */
     }
 
+    /* Compact fieldset padding */
     fieldset {
-        padding: 15px;
+        padding: var(--spacing-md);                            /* BOX MODEL: Reduce padding */
     }
 
+    /* Make table more compact */
     table {
-        font-size: 0.9rem;
+        font-size: 0.9rem;                                     /* TYPOGRAPHY: Slightly smaller text */
     }
 
     th, td {
-        padding: 10px;
+        padding: var(--spacing-sm);                            /* BOX MODEL: Reduce cell padding */
     }
 
+    /* Adjust main content padding */
     main {
-        padding-bottom: 150px;
+        padding-bottom: 150px;                                 /* BOX MODEL: Prevent footer overlap */
     }
 }
 
+/* ===== MOBILE BREAKPOINT (≤480px) ===== */
+/*
+ * MEDIA QUERY: max-width: 480px
+ * Applies styles to mobile devices (smartphones)
+ * Screen width 480px or less
+ * 
+ * Changes:
+ * - Very small font sizes
+ * - Minimal padding/margins
+ * - Vertical stacking for all layouts
+ * - Touch-friendly button sizes
+ * - Full-width form elements
+ */
 @media (max-width: 480px) {
+    /* Reduce overall body font size for mobile */
     body {
-        font-size: 0.95rem;
+        font-size: 0.95rem;                                    /* TYPOGRAPHY: Slightly smaller base size */
     }
 
+    /* Very small header title on mobile */
     header h1 {
-        font-size: 1.4rem;
+        font-size: 1.4rem;                                     /* TYPOGRAPHY: Reduce heading */
     }
 
+    /* Responsive heading sizes for mobile */
     h2 {
-        font-size: 1.4rem;
+        font-size: 1.4rem;                                     /* TYPOGRAPHY: Responsive h2 */
     }
 
     h3 {
-        font-size: 1.1rem;
+        font-size: 1.1rem;                                     /* TYPOGRAPHY: Responsive h3 */
     }
 
+    /* Reduce section padding on mobile */
     section {
-        padding: 15px;
+        padding: var(--spacing-md) var(--spacing-sm);         /* BOX MODEL: Minimal padding */
     }
 
+    /* Compact form on mobile */
     form {
-        padding: 20px;
+        padding: var(--spacing-lg);                            /* BOX MODEL: Reduce padding */
     }
 
+    /* Compact article cards on mobile */
     article {
-        padding: 15px;
+        padding: var(--spacing-md);                            /* BOX MODEL: Minimal padding */
     }
 
+    /* Smaller, touch-friendly buttons */
     button {
-        padding: 10px 15px;
-        font-size: 0.9rem;
+        padding: var(--spacing-sm) var(--spacing-md);         /* BOX MODEL: Smaller button */
+        font-size: 0.9rem;                                     /* TYPOGRAPHY: Smaller text */
     }
 
+    /* Adjust aside spacing on mobile */
     aside {
-        margin: 15px 5px;
+        margin: var(--spacing-md) var(--spacing-xs);          /* BOX MODEL: Minimal margins */
     }
 }
+
+/* ===== CSS SELECTORS REFERENCE ===== */
+/*
+ * SELECTOR TYPES DEMONSTRATED IN THIS STYLESHEET:
+ * 
+ * 1. UNIVERSAL SELECTOR: * { }
+ *    - Selects ALL elements
+ *    - Used for reset: margin, padding, box-sizing
+ * 
+ * 2. TYPE/ELEMENT SELECTORS: h1, p, button, div, etc.
+ *    - Select specific HTML elements
+ *    - Example: button { background-color: blue; }
+ * 
+ * 3. CLASS SELECTORS: .class-name { }
+ *    - Select elements with specific class
+ *    - Can be reused multiple times
+ *    - Example: <div class="text-center">
+ * 
+ * 4. ID SELECTORS: #id-name { }
+ *    - Select element with specific ID (unique)
+ *    - Highest specificity
+ *    - Example: <div id="header">
+ * 
+ * 5. ATTRIBUTE SELECTORS: input[type="email"] { }
+ *    - Select elements by attribute
+ *    - Examples: [type], [disabled], [data-*]
+ * 
+ * 6. PSEUDO-CLASS SELECTORS: :hover, :focus, :active, etc.
+ *    - Select element in specific state
+ *    - :hover - when user hovers
+ *    - :focus - when element receives focus
+ *    - :active - when element is activated
+ *    - :nth-child(n) - nth child element
+ * 
+ * 7. PSEUDO-ELEMENT SELECTORS: ::before, ::after, ::first-letter
+ *    - Select part of element (not in this project currently)
+ *    - ::before - add content before
+ *    - ::after - add content after
+ * 
+ * 8. DESCENDANT SELECTOR: parent child { }
+ *    - Select child of parent
+ *    - Example: nav a { } (a inside nav)
+ * 
+ * 9. CHILD SELECTOR: parent > child { }
+ *    - Select direct child only
+ *    - Example: ul > li { }
+ * 
+ * 10. GROUPING SELECTOR: h1, h2, h3 { }
+ *     - Apply same style to multiple selectors
+ *     - Separated by commas
+ * 
+ * 11. ADJACENT SIBLING: element + element { }
+ *     - Select element immediately after another
+ * 
+ * 12. GENERAL SIBLING: element ~ element { }
+ *     - Select any sibling element
+ */
